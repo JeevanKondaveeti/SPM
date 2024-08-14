@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Student register</title>
+  </head>
+  <body>
+    <div class="register">
+      <center>
+        <h2>Register form</h2>
+      </center>
+
+      <form action method="post">
+        <label for>Email:</label><br />
+        <input type="email" name="email" id><br />
+        <label for>First name:</label><br />
+        <input type="text" name="First name" id><br />
+        <label for>Last name:</label><br />
+        <input type="text" name="Last name" id><br />
+        <label for>Password:</label><br />
+        <input type="password" name="password" id maxlength="8"
+          minlength="6"><br />
+        <center>
+          <button>Submit</button>
+        </center>
+      </form>
+    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <center>
+      <div class="alert">
+        <span class="closebtn"
+          onclick="this.parentElement.style.display='none';">x</span>
+        {{ message }}
+      </div>
+    </center>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </body>
+</html>

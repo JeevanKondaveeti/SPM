@@ -1,0 +1,41 @@
+.welcome{
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+    color:rgb(255, 255, 255);
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.welcome button{
+    height: 35px;
+    background-color: black;
+    color:white;
+    font-weight: bold;
+    width:80px;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+.welcome button :hover{
+    background-color: white;
+    color:black;
+}
+.features{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(214, 214, 214, 0.8);
+    border-radius: 10px;
+    backdrop-filter: blur(2%);
+    
+}
+.features li{
+    text-align: left;
+    font-size: medium;
+    list-style-type: none;
+
+}

@@ -1,0 +1,117 @@
+from flask import Flask,redirect,render_template,request,url_for,flash
+from colorama import Fore, Back, Style
+from otp import genotp
+from spmmail import semdmail
+import mysql.connector
+from stoken  import token,dtoken
+app = Flask(__name__)
+app.secret_key = "E11CD7B8D64CAA25611DD4EE22393"
+
+mydb = mysql.connector.connect(user='root',password='admin',db='SPM',host='localhost')
+#print(mydb)
+if mydb.is_connected():
+    print("Connected")
+else:
+    print("Database not connected")
+@app.route('/')
+def home():
+    return render_template("welcome.html")
+
+@app.route('/register',methods=['GET','POST'])
+def register():
+    if request.method == 'POST':
+        data=dict(request.form)
+        s_mail = data['email']
+        cursor = mydb.cursor(buffered=True)
+        """ cursor.execute(f'select * from student where email = {s_mail}') """
+        cursor.execute('select count(email) from student where email = %s',[s_mail])
+        dbdata = cursor.fetchone()[0]
+        print(dbdata)
+        if dbdata == 0:
+            otp = genotp()
+            data['otp'] = otp
+            subject= 'Verification OTP for SPM application'
+            body = f'Registration OTP for SPM application {otp}'
+            to = data['email']
+            semdmail(to,body,subject)
+            print(Fore.RED+"data received from registration form")
+            return redirect(url_for('otp_verification',data1=token(data=data)))
+        else:
+            flash('Email already existed')
+            return redirect(url_for('register'))
+
+            """
+            return 'mail  already exist'
+         cursor = mydb.cursor(buffered=True)
+        data=cursor.execute('insert into student (email,student_fname,student_lname,password) values (%s,%s,%s,%s)',[s_mail,s_fname,s_lname,s_pass])
+        print(data)
+        mydb.commit()
+        cursor.close() """
+    return render_template("register.html")
+
+@app.route('/otp/<data1>',methods = ['GET','POST'])
+def otp_verification(data1):
+    try:
+        data = dtoken(data=data1)
+        print(type(data))
+        print(data) 
+        if request.method == 'POST':
+            s_mail = data['email']
+            s_fname = data['First name']
+            s_lname = data['Last name']
+            s_pass = data['password']
+            uotp = request.form['otp'] 
+            if uotp == data['otp'] :
+                cursor = mydb.cursor(buffered=True)
+                data=cursor.execute('insert into student (email,student_fname,student_lname,password) values (%s,%s,%s,%s)',[s_mail,s_fname,s_lname,s_pass])
+                print(data)
+                mydb.commit()
+                cursor.close()
+                flash('USER ADDED TO SERVER')
+                return redirect(url_for('register'))
+            #return 'Registered successfully'
+            else:
+                flash('INVALID OTP')
+                return redirect(url_for('otp_verification',data1=token(data=data)))
+            #return f'otp invalid pls check your mail'
+    except Exception as e:
+        print(e)
+        return "time out of otp"
+    finally:
+        print("ok form otp")
+            
+    return render_template('otp_verification.html')
+
+@app.route('/Login',methods=['GET','POST'])
+def Login():
+    if request.method == 'POST':
+        login_info = dict(request.form)
+        email = login_info['email']
+        passwrd = login_info['password']
+        print([email,passwrd])
+        try:
+            cursor = mydb.cursor(buffered=True)
+            cursor.execute('select email,password from student where email = %s',[email])
+            data = cursor.fetchone()
+            passkey = data[1].decode('utf-8')
+            print(type(passkey))
+        except Exception as e:
+            print(e)
+            flash("Please check email")
+            return redirect(url_for('Login'))
+        else:
+            if passkey == passwrd:
+                return render_template('panel.html')
+            else:
+                flash("Invalid Password")
+                
+                
+    return render_template("Login.html")
+@app.route('/addNote',methods = ['GET','POST'])
+def addNotes():
+    if request.method == 'POST':
+        notes = dict(request.form)
+        print(notes)
+        return "ok"
+    return render_template('add_notes.html')
+app.run(debug=True,host='localhost',port=1601,use_reloader=True)

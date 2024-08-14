@@ -1,0 +1,135 @@
+
+body{
+    background-color: aliceblue;
+}
+.form{
+    background-color: rgba(128, 255, 0, 0.39);
+    background-image: url('images/bg2.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    width:max-content;
+    margin: 2%;
+    padding: 5%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.form input{
+    width: 300px;
+    height: 35px;
+    font-size:medium;
+    padding: 2px;
+    margin: 1px;
+    
+}
+.form label{
+    font-weight: bold;
+    text-align: left;
+    float: left;
+}
+.form button{
+    padding: 12px;
+    margin: 10px;
+    font-weight: bold;
+    background-color: rgb(213, 197, 46);
+    border-radius: 5px;
+}
+.register{
+    background-color: rgba(46, 149, 213, 0.237);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width:fit-content;
+    padding:1%;
+    border-radius: 5px;
+}
+.register input{
+    width: 300px;
+    height: 33px;
+    border-radius: 6px;
+    margin: 2px;
+    border-color: rgba(255, 255, 255, 0);
+  
+}
+
+.register button{
+    width : 100px;
+    height : 33px;
+    background-color: rgba(46, 149, 213, 0.766);
+    color: white;
+    margin: 2px;
+    border-radius: 3px;
+    border-color: rgba(255, 255, 255, 0);
+}
+
+.OTP_VERIFICATION{
+    background-color: rgba(46, 149, 213, 0.237);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width:fit-content;
+    padding:1%;
+    border-radius: 5px;
+}
+
+.OTP_VERIFICATION input{
+    width: 300px;
+    height: 33px;
+    border-radius: 6px;
+    margin: 2px;
+    border-color: rgba(255, 255, 255, 0);
+  
+}
+
+.OTP_VERIFICATION button{
+    width : 100px;
+    height : 33px;
+    background-color: rgba(46, 149, 213, 0.766);
+    color: white;
+    margin: 2px;
+    border-radius: 3px;
+    border-color: rgba(255, 255, 255, 0);
+}
+.alert {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #36f49b; /* Red */
+    color: rgb(2, 2, 2);
+    margin-bottom: 15px;
+    width: max-content;
+    border-radius: 20px;
+    margin:10px;
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  }
+
+  .Notes{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 10%;
+  }

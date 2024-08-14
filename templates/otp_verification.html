@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/style.css">
+        <title>SPM VERIFICATION</title>
+    </head>
+    <body>
+        <div class="OTP_VERIFICATION">
+            <center>
+                <h2>OTP VERIFICATION</h2>
+            </center>
+            <form action method="post">
+                <label for>Enter OTP:</label><br />
+                <input type="text" name="otp" id><br />
+                <center>
+                    <button>Submit</button>
+                </center>
+            </form>
+        </div>
+        <footer>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <center>
+            <div class="alert">
+                {{ message }}
+                <span class="closebtn"
+                    onclick="this.parentElement.style.display='none';">x</span>
+                
+            </div>
+        </center>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </footer>
+    </body>
+</html>

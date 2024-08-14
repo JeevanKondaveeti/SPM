@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/welcome.css">
+    <title>SPM</title>
+</head>
+<body>
+    <div class="welcome">
+    <center>
+        <h1>Welcome to SPM</h1>
+        <h4>Every byte of information about a student is a brushstroke on the canvas of their education; personal management systems are the frames that hold their masterpiece.</h4>
+        <div class="features">
+        <h3>Store student information</h3>
+        <ol>
+            <li>Personal details (name, age, address)</li>
+            <li>Academic records (grades, transcripts)</li>
+            <li>Contact information (email, phone number)</li>
+            <li>Enrollment status (current courses, year of study)</li>
+            <li>Attendance records</li>
+            <li>Emergency contact information</li>
+            <li>Payment and financial aid details</li>
+        </ol>  
+        </div>
+        <div>
+            <a href="{{url_for('register')}}"><button>Signup</button></a>
+            <a href="{{url_for('Login')}}"><button>Login</button></a>
+        </div>
+    </center>
+</div>
+</body>
+</html>
