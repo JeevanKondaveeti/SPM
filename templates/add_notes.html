@@ -1,12 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>Add Notes</title>
-</head>
+{% extends 'panel.html' %}
+
+    
 <body>
+    {% block content %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <center>
+        <div class="alert">
+            {{ message }}
+            <span class="closebtn"
+                onclick="this.parentElement.style.display='none';">x</span>
+            
+        </div>
+    </center>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="Notes">
         <center>
             <h4>Add Notes</h4>
@@ -19,5 +29,5 @@
             </form>
         </center>
     </div>
+    {% endblock %}
 </body>
-</html>
