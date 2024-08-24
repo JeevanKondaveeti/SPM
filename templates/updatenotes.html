@@ -1,17 +1,18 @@
 {% extends 'panel.html' %}
 {% block content %}
 <body>
+  <div class="mb-3" style="width: 800px;  margin-top: 2%;margin-left: 10%; margin-right: 10%; padding: 1%; background-color: #6610f2;">
     <form  method="post">
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+        <input type="text"  name="Notes_Title" class="form-control" id="exampleFormControlInput1" placeholder="" value={{notes_data[0]}}>
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+        <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="5">{{notes_data[1]}}</textarea>
       </div>
       <button type="submit" class="btn btn-dark">Update</button>
     </form>
-    
+  </div>
 </body>
 {% endblock %}

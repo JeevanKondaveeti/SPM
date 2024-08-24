@@ -158,8 +158,53 @@ def allnotes():
     cursor = mydb.cursor(buffered=True)
     cursor.execute("select created_at,nid,title from notes where added_by=%s",[added_by])
     data = cursor.fetchall()
-    print(data)
+    #print(data)
     return render_template('table.html',data=data)
+
+@app.route('/viewnotes/<nid>')
+def viewnotes(nid):
+    id=int(nid)
+    if not session.get('email'):
+        return render_template('Login.html')
+    else:
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('select title,note_content from notes where nid = %s ',[id])
+        notes_data = cursor.fetchone()
+        #print(notes_data)
+        return render_template('viewnotes.html',notes_data=notes_data)
+
+@app.route('/update/<nid>',methods = ['GET','POST'])
+def update_notes(nid):
+    id=int(nid)
+    if not session.get('email'):
+        return render_template('Login.html')
+    else:   
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('select title,note_content from notes where nid = %s ',[id])
+        notes_data = cursor.fetchone()
+        if request.method == 'POST':
+            notes = dict(request.form)
+            tittle = notes['Notes_Title']
+            content = notes['content']
+            cursor.execute('UPDATE notes SET title = %s, note_content = %s WHERE nid = %s; ',[tittle,content,id])
+            mydb.commit()
+            cursor.close()
+            return redirect(url_for('allnotes'))
+        return render_template('updatenotes.html',notes_data=notes_data)
+
+@app.route('/delete_notes/<nid>')
+def delete_notes(nid):
+    id=int(nid)
+    if not session.get('email'):
+        return render_template('Login.html')
+    else:
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('delete from notes where nid=%s',[id])
+        mydb.commit()
+        cursor.close()
+        flash(f'Notes with {id} deleted successfully')
+        return redirect(url_for('allnotes'))
+
 
 @app.route('/Logout')
 def logout():

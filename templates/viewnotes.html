@@ -1,0 +1,21 @@
+{% extends 'panel.html' %} {% block content %}
+<body>
+  <div class="Notes">
+    <center>
+      <h4>Notes</h4>
+      <label for="">Enter Notes Title</label><br />
+      <input type="text" name="Notes_Title" placeholder="Title" value={{notes_data[0]}} readonly/><br />
+      <label for="">Notes:</label><br />
+      <textarea
+        name="content"
+        id=""
+        placeholder="Enter your notes"
+        rows="4"
+        cols="50"
+        readonly
+      >{{notes_data[1]}}</textarea
+      ><br />
+    </center>
+  </div>
+  {% endblock %}
+</body>
